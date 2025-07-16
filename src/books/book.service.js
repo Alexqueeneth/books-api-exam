@@ -3,22 +3,39 @@ const books = [
     { id: '2', title: 'Book Two', author: 'Author B' }
 ];
 
-export const getAllBooks = () => books;
+export const getAllBooks = async() =>{
+    const books = await books.find()
+    return books;
+}
+export const getBookById = async (id) =>
+    await books.findById(book => book.id === id);
 
-export const getBookById = (id) => books.find(book => book.id === id);
-
-export const createBook = (data) => {
+export const createBook = async (book) => {
     const newBook = { id: String(books.length + 1), ...data };
-    books.push(newBook);
+   await books.push(newBook);
     return newBook;
 };
 
-export const updateBook = (id, data) => {
-    // Logic error: does not update the book
-    return books.find(book => book.id === id);
-};
+
+export const updateBook = (id, Book) => {
+    const index = todos.findIndex(book => book.id === id); 
+    if (index !== -1) {
+        throw new Error('Book not found');
+}
+return books[index] = {
+        ...books[index],
+        ...Book,
+    };
+    
+}
 
 export const deleteBook = (id) => {
-    // Logic error: does not remove the book
-    return true;
-}; 
+    const index = books.findIndex(book => book.id === id);
+    if (index !== -1) {
+        throw new error('Book not found');
+    }
+
+        books.splice(index, 1);
+        return true;}
+
+
